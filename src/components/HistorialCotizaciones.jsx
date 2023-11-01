@@ -1,5 +1,6 @@
 import  { useState, useEffect } from 'react';
 import styles from './Historial.module.css';
+import { Link } from 'react-router-dom';
 
 function HistorialCotizaciones() {
   const [cotizaciones, setCotizaciones] = useState([]);
@@ -42,9 +43,9 @@ function HistorialCotizaciones() {
           </tbody>
         </table>
         <div className={styles.btn}>
-          <a href="index.html">
+          <Link to="/">
             <button>VOLVER</button>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 export default function Header() {
   return (
     <div className={styles.header}>
-      <Link to="Historial" >
+      <Link to="/Historial" >
         <span>📋</span>
       </Link>
       <h1>Seguros del hogar 🏡</h1>
