@@ -1,0 +1,13 @@
+
+.propiedad {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-width: 50% !important;
+    width: 70% !important;
+}
+
+div label {
+   color: black;
+   font-weight: 400
+}

@@ -1,10 +1,14 @@
 
+import { Link } from 'react-router-dom';
+import styles from './Header.module.css';
 
 export default function Header() {
   return (
-    <header>
-         <a href="historial.html"><span title="Ver Historial">📋</span></a>
-        <h1 className="center separador">Seguros del hogar 🏡</h1>
-      </header>
-  )
+    <div className={styles.header}>
+      <Link to="Historial" >
+        <span>📋</span>
+      </Link>
+      <h1>Seguros del hogar 🏡</h1>
+    </div>
+  );
 }

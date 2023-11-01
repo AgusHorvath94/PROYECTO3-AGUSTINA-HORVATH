@@ -1,0 +1,30 @@
+.metros2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.metros2 > input {
+    width: 278%; 
+}
+
+div label {
+    color: black;
+    font-weight: 400
+ }
+ 
+
+@media (max-width: 768px) {
+    .metros2 > input {
+        width: 200%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .metros2 > input {
+        width: 100%; 
+    }
+}
+

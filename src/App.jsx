@@ -2,59 +2,72 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Propiedad from "./components/Propiedad";
 import Ubicacion from "./components/Ubicacion";
+import styles from "./App.module.css";
+import MetrosCuadrados from "./components/MetrosCuadrados";
+import Cotizacion from "./components/Cotizacion";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HistorialCotizaciones from "./components/HistorialCotizaciones";
+
+
+
 
 function App() {
-  const [selectPropiedad, setSelectPropiedad] = useState('...');
-  const [selectUbicacion, setSelectUbicacion] = useState('...');
+  const [selectPropiedad, setSelectPropiedad] = useState("...");
+  const [selectUbicacion, setSelectUbicacion] = useState("...");
   const [inputMetros2, setInputMetros2] = useState(20);
-  const [valorPoliza, setValorPoliza] = useState('0.00');
-  const costoM2 = 38.86;
-  const [datosPropiedad, setDatosPropiedad] = useState([]); 
-  const [datosUbicacion, setDatosUbicacion] = useState([]); 
+  const [valorPoliza, setValorPoliza] = useState("0.00");
+  const costoM2 = 35.86;
+  const [datosPropiedad, setDatosPropiedad] = useState([]);
+  const [datosUbicacion, setDatosUbicacion] = useState([]);
 
   useEffect(() => {
-    fetch('/propiedad.json')
+    fetch("/propiedad.json")
       .then((response) => response.json())
       .then((data) => {
-        setDatosPropiedad(data); 
-      })
+        setDatosPropiedad(data);
+      });
 
-
-    fetch('/ubicacion.json')
+    fetch("/ubicacion.json")
       .then((response) => response.json())
       .then((data) => {
-        setDatosUbicacion(data); 
-      })
-     
+        setDatosUbicacion(data);
+      });
   }, []);
 
-  const realizarCotizacion = () => {
-    
-    const factorPropiedad = datosPropiedad.find((prop) => prop.tipo === selectPropiedad)?.factor || 1.0;
-    const factorUbicacion = datosUbicacion.find((ubi) => ubi.tipo === selectUbicacion)?.factor || 1.0;  
   
-    const resultado = costoM2 * factorPropiedad * factorUbicacion * inputMetros2;
-    setValorPoliza(resultado.toFixed(2));
-  }
 
   return (
-    <div>
+
+    <>
+    <Router>
+        
       <Header />
-      <Propiedad onChange={(value) => setSelectPropiedad(value)} />
-      <Ubicacion onChange={(value) => setSelectUbicacion(value)} />
-      <label htmlFor="metros2">Ingresa los Metros cuadrados:</label>
-      <input
-        type="number"
-        id="metros2"
-        value={inputMetros2}
-        min="20"
-        max="500"
-        onChange={(e) => setInputMetros2(e.target.value)}
-        required
-      />
-      <button onClick={realizarCotizacion}>COTIZAR</button>
-      <p>Precio estimado: $ {valorPoliza}</p>
-    </div>
+      <div className={styles.mainContainer}>
+        <h2>Completa los datos solicitados</h2>
+        <Propiedad setPropiedad={setSelectPropiedad} />
+        <Ubicacion setUbicacion={setSelectUbicacion} />
+        <MetrosCuadrados
+          inputMetros2={inputMetros2}
+          setInputMetros2={setInputMetros2}
+        />
+        <Cotizacion
+          costoM2={costoM2}
+          inputMetros2={inputMetros2}
+          datosPropiedad={datosPropiedad}
+          selectPropiedad={selectPropiedad}
+          datosUbicacion={datosUbicacion}
+          selectUbicacion={selectUbicacion}
+          valorPoliza={valorPoliza}
+          setValorPoliza={setValorPoliza}
+        />
+      </div>
+        <Routes>
+        <Route path="Historial" element={<HistorialCotizaciones />} />
+        </Routes>
+      </Router>
+    
+    </>
+  
   );
 }
 

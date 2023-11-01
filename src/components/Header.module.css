@@ -1,0 +1,24 @@
+.header {
+    text-align: center;
+  
+   
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 45px;
+    color: aliceblue;
+}
+
+a {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+span {
+    text-align: center !important;
+    font-size: xx-large;
+    margin-top: 1rem;
+    margin-right: 2rem;
+}
