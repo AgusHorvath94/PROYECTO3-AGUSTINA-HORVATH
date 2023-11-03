@@ -1,8 +1,9 @@
+import { useState } from "react";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./Cotizacion.module.css";
-import { useState } from "react";
+import loaderGif from "../assets/Ellipsis-1.1s-44px.gif";
 
 function Cotizacion({
   costoM2,
@@ -15,9 +16,12 @@ function Cotizacion({
   setValorPoliza,
 }) {
   const [cotizacionRealizada, setCotizacionRealizada] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
 
   const datosCompletos = () => {
-    return selectPropiedad !== "..." && selectUbicacion !== "..." && inputMetros2 > 0;
+    return (
+      selectPropiedad !== "..." && selectUbicacion !== "..." && inputMetros2 > 0
+    );
   };
 
   const realizarCotizacion = () => {
@@ -72,7 +76,11 @@ function Cotizacion({
   };
 
   const handleClick = () => {
-    realizarCotizacion();
+    setShowLoader(true);
+    setTimeout(() => {
+      realizarCotizacion();
+      setShowLoader(false);
+    }, 1000);
   };
 
   const notify = () => {
@@ -82,7 +90,15 @@ function Cotizacion({
 
   return (
     <>
-      <button onClick={handleClick}>COTIZAR</button>
+      <div className={styles.buttonContainer}>
+        <button onClick={handleClick} disabled={showLoader}>
+          {showLoader ? (
+            <img src={loaderGif} alt="Loader" width="30px" />
+          ) : (
+            "COTIZAR"
+          )}
+        </button>
+      </div>
       <p>
         Precio estimado: ${valorPoliza}
         <span className={styles.save} onClick={notify}>
