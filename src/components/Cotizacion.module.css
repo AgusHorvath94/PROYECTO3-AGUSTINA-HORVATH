@@ -24,3 +24,15 @@ button:hover {
 button span p {
   font-size: 1.1rem;
 }
+
+/*Media queries*/
+
+@media (max-width: 480px) {
+
+p  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+}
