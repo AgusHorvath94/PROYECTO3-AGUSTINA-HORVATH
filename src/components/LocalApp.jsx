@@ -16,13 +16,13 @@ export default function LocalApp() {
   const [datosUbicacion, setDatosUbicacion] = useState([]);
 
   useEffect(() => {
-    fetch("/propiedad.json")
+    fetch("../propiedad.json")
       .then((response) => response.json())
       .then((data) => {
         setDatosPropiedad(data);
       });
 
-    fetch("/ubicacion.json")
+    fetch("../ubicacion.json")
       .then((response) => response.json())
       .then((data) => {
         setDatosUbicacion(data);
