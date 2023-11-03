@@ -1,16 +1,15 @@
-import  { useState, useEffect } from 'react';
-import styles from './Historial.module.css';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import styles from "./Historial.module.css";
+import { Link } from "react-router-dom";
 
 function HistorialCotizaciones() {
   const [cotizaciones, setCotizaciones] = useState([]);
 
-
   useEffect(() => {
-    const cotizacionesGuardadas = JSON.parse(localStorage.getItem("cotizaciones")) || [];
+    const cotizacionesGuardadas =
+      JSON.parse(localStorage.getItem("cotizaciones")) || [];
     setCotizaciones(cotizacionesGuardadas);
   }, []);
-
 
   const renderCotizaciones = () => {
     return cotizaciones.map((cotizacion, index) => (
@@ -38,9 +37,7 @@ function HistorialCotizaciones() {
               <th>Póliza mensual</th>
             </tr>
           </thead>
-          <tbody>
-            {renderCotizaciones()}
-          </tbody>
+          <tbody>{renderCotizaciones()}</tbody>
         </table>
         <div className={styles.btn}>
           <Link to="/">

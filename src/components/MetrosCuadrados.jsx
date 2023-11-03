@@ -1,13 +1,7 @@
-
-import styles from './MetrosCuadrados.module.css';
+import styles from "./MetrosCuadrados.module.css";
 
 export default function MetrosCuadrados({ inputMetros2, setInputMetros2 }) {
-  
-    
-  
-    return (
-
-    
+  return (
     <div className={styles.metros2}>
       <label htmlFor="metros2">Ingresa los Metros cuadrados:</label>
       <input
@@ -19,6 +13,6 @@ export default function MetrosCuadrados({ inputMetros2, setInputMetros2 }) {
         onChange={(e) => setInputMetros2(e.target.value)}
         required
       />
-      </div>
-  )
+    </div>
+  );
 }
