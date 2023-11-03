@@ -5,6 +5,7 @@ import Ubicacion from "./Ubicacion";
 import styles from "./LocalApp.module.css";
 import MetrosCuadrados from "./MetrosCuadrados";
 import Cotizacion from "./Cotizacion";
+import Axios from "axios";
 
 export default function LocalApp() {
   const [selectPropiedad, setSelectPropiedad] = useState("...");
@@ -16,16 +17,20 @@ export default function LocalApp() {
   const [datosUbicacion, setDatosUbicacion] = useState([]);
 
   useEffect(() => {
-    fetch("/src/propiedad.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setDatosPropiedad(data);
+    Axios.get("https://653831aaa543859d1bb14d53.mockapi.io/propiedades")
+      .then((response) => {
+        setDatosPropiedad(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching propiedades:", error);
       });
 
-    fetch("/src/ubicacion.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setDatosUbicacion(data);
+    Axios.get("https://653831aaa543859d1bb14d53.mockapi.io/ubicaciones")
+      .then((response) => {
+        setDatosUbicacion(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching ubicaciones:", error);
       });
   }, []);
 
